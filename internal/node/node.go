@@ -169,7 +169,7 @@ func NewKoinosP2PNode(ctx context.Context, listenAddr string, localRPC rpc.Local
 }
 
 func (n *KoinosP2PNode) handleBlockBroadcast(topic string, data []byte) {
-	log.Debugf("Received koinos.block.accept broadcast: %v", string(data))
+	log.Debugf("Received koinos.block.accept broadcast: %d bytes", len(data))
 	blockBroadcast := &broadcast.BlockAccepted{}
 	err := proto.Unmarshal(data, blockBroadcast)
 	if err != nil {
@@ -211,7 +211,7 @@ func (n *KoinosP2PNode) handleTransactionBroadcast(topic string, data []byte) {
 }
 
 func (n *KoinosP2PNode) handleForkUpdate(topic string, data []byte) {
-	log.Debugf("Received koinos.block.forks broadcast: %v", string(data))
+	log.Debugf("Received koinos.block.forks broadcast: %d bytes", len(data))
 	forkHeads := &broadcast.ForkHeads{}
 	err := proto.Unmarshal(data, forkHeads)
 	if err != nil {
